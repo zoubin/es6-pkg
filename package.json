@@ -1,0 +1,39 @@
+{
+  "name": "es6-pkg",
+  "version": "0.0.1",
+  "description": "Boilerplate for developing node modules using es6",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoubin/es6-pkg.git"
+  },
+  "keywords": [
+    "es6",
+    "babel",
+    "boilerplate",
+    "package"
+  ],
+  "author": "zoubin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zoubin/es6-pkg/issues"
+  },
+  "homepage": "https://github.com/zoubin/es6-pkg#readme",
+  "dependencies": {
+    "babel-core": "^5.8.25"
+  },
+  "devDependencies": {
+    "callback-sequence": "^1.2.1",
+    "del": "^2.0.2",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1",
+    "gulp-eslint": "^1.0.0",
+    "gulp-istanbul": "^0.10.1",
+    "gulp-json-editor": "^2.2.1",
+    "gulp-tape": "0.0.3",
+    "isparta": "^3.0.4"
+  }
+}
