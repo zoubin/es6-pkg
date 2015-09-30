@@ -1,6 +1,6 @@
 {
   "name": "es6-pkg",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Boilerplate for developing node modules using es6",
   "main": "index",
   "scripts": {
