@@ -76,6 +76,9 @@ Refer to [tape](https://github.com/substack/tape) to learn how to write tests.
 
 The default reporter is [tap-spec](https://github.com/scottcorgan/tap-spec).
 
+**NOTE**: Tests should depend upon the same `tape` with `gulp-tape`,
+otherwise the reporter may fail to receive the output.
+
 Coverage statistics is done by
 [istanbul](https://github.com/SBoudrias/gulp-istanbul) and
 [isparta](https://github.com/douglasduteil/isparta).

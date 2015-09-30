@@ -39,11 +39,15 @@ function edit_package() {
   var editor = require('gulp-json-editor');
   return vfs.src('package.json', { cwd: process.cwd() })
     .pipe(editor(function (p) {
-      p.main = 'lib/main';
+      p.main = 'index';
+
+      p.scripts = p.scripts || {};
+      p.scripts.test = p.scripts.test || 'gulp';
+
       p.devDependencies = mix(
         unpick(
           Object.keys(p.dependencies || {}),
-          require('../package.json').devDependencies
+          require('../template/package.json').devDependencies
         ),
         p.devDependencies
       );
@@ -56,14 +60,17 @@ function copy() {
   var files = [
     'index.js',
     'gulpfile.babel.js',
-    'lib/main.es6',
-    'test/main.es6',
-    '.eslintrc',
-    '.npmignore',
-    '.gitignore',
+    'eslintrc',
+    'gitignore',
   ];
-  var srcdir = path.resolve(__dirname, '..');
+  var rename = require('gulp-rename');
+  var srcdir = path.resolve(__dirname, '..', 'template');
   return vfs.src(files, { cwd: srcdir, base: srcdir })
+    .pipe(rename(function (p) {
+      if (['eslintrc', 'gitignore'].indexOf(p.basename) !== -1) {
+        p.basename = '.' + p.basename;
+      }
+    }))
     .pipe(vfs.dest(process.cwd(), { overwrite: false }));
 }
 

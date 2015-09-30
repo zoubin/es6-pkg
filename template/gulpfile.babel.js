@@ -5,11 +5,6 @@ gulp.task('clean', () => {
   return del('build');
 });
 
-gulp.task('bin', ['clean'], () => {
-  return gulp.src('bin/cmd.js')
-    .pipe(gulp.dest('build/bin'));
-});
-
 gulp.task('lib', ['clean'], () => {
   let babel = require('gulp-babel');
   return gulp.src('lib/*.es6')
@@ -32,7 +27,7 @@ gulp.task('package', ['clean'], () => {
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('build', ['bin', 'lib', 'docs', 'package']);
+gulp.task('build', ['lib', 'docs', 'package']);
 
 gulp.task('lint', () => {
   let eslint = require('gulp-eslint');
@@ -59,9 +54,10 @@ gulp.task('coverage', require('callback-sequence')(
   function test() {
     require('./');
     let tape = require('gulp-tape');
+    let reporter = require('tap-spec');
     return gulp.src('test/*.es6')
       .pipe(tape({
-        reporter: require('tap-spec')(),
+        reporter: reporter(),
       }));
   },
   function report() {
