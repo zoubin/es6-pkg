@@ -22,6 +22,11 @@ gulp.task('docs', ['clean'], () => {
     .pipe(gulp.dest('build'));
 });
 
+gulp.task('template', ['clean'], () => {
+  return gulp.src('template/*')
+    .pipe(gulp.dest('build/template'));
+});
+
 gulp.task('package', ['clean'], () => {
   let editor = require('gulp-json-editor');
   return gulp.src('./package.json')
@@ -32,7 +37,7 @@ gulp.task('package', ['clean'], () => {
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('build', ['bin', 'lib', 'docs', 'package']);
+gulp.task('build', ['bin', 'lib', 'docs', 'template', 'package']);
 
 gulp.task('lint', () => {
   let eslint = require('gulp-eslint');
