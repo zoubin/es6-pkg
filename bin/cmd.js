@@ -5,7 +5,7 @@ var vfs = require('vinyl-fs');
 var sequence = require('callback-sequence');
 
 sequence.run(
-  [access_package, edit_package, copy],
+  [access_package, edit_package, copy_necessary, copy_example],
   function (err) {
     if (err) {
       console.log(err);
@@ -56,7 +56,7 @@ function edit_package() {
     .pipe(vfs.dest(process.cwd()));
 }
 
-function copy() {
+function copy_necessary() {
   var files = [
     'index.js',
     'gulpfile.babel.js',
@@ -71,6 +71,16 @@ function copy() {
         p.basename = '.' + p.basename;
       }
     }))
+    .pipe(vfs.dest(process.cwd(), { overwrite: false }));
+}
+
+function copy_example() {
+  var files = [
+    'lib/main.es6',
+    'test/main.es6',
+  ];
+  var srcdir = path.resolve(__dirname, '..');
+  return vfs.src(files, { cwd: srcdir, base: srcdir })
     .pipe(vfs.dest(process.cwd(), { overwrite: false }));
 }
 
