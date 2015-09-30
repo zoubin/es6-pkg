@@ -1,5 +1,5 @@
 import { test } from 'tape';
-import { abs, halve } from '../lib/entry';
+import { abs, halve } from '../lib/main';
 
 test('abs', function(t) {
   t.equal(abs(1), 1, 'positive');
