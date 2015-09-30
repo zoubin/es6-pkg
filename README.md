@@ -6,67 +6,58 @@ Boilerplate for developing node modules using es6
 ```bash
 npm i -g es6-pkg
 
-cd /path/to/your/project
+mkdir your_project
 
-# maybe
+cd your_project
+
+# create `package.json`
 npm init
 
+# create files
 es6pkg
 
+npm install
+
+# test the sample code
+gulp
+
+# coding
+
+# check coverage
+npm test
+
+# commit your code and bump version
+
+gulp build
+
+cd build
+
+npm publish
+
 ```
 
-Make sure you are in the package root directory,
-where a `package.json` must exist.
+### project directory
 
-Make sure no `index.js` exist in the root directory.
-The entry file is `lib/main.es6` by default.
+Put all your scripts in `lib/`, and tests in `test/`.
 
-Your project directories should look like this:
+If there is a `bin` directory,
+you should modify `gulpfile.babel.js`.
 
 ```
-⌘ tree -L 2
+⌘ tree .
 .
-├── LICENSE
-├── README.md
-├── bin
-├── build
-│   ├── LICENSE
-│   ├── README.md
-│   ├── lib
-│   └── package.json
-├── coverage
-│   ├── coverage-final.json
-│   ├── lcov-report
-│   └── lcov.info
 ├── gulpfile.babel.js
 ├── index.js
 ├── lib
 │   └── main.es6
-├── node_modules
-│   ├── babel-core
-│   ├── callback-sequence
-│   ├── del
-│   ├── gulp
-│   ├── gulp-babel
-│   ├── gulp-eslint
-│   ├── gulp-istanbul
-│   ├── gulp-json-editor
-│   ├── gulp-tape
-│   ├── gulp-util
-│   ├── isparta
-│   ├── require-uncached
-│   ├── run-sequence
-│   ├── tap
-│   ├── tap-spec
-│   ├── tape
-│   └── through2
 ├── package.json
 └── test
     └── main.es6
 ```
 
-Run `npm test` or `gulp` to see if everything works properly.
-You should see output like:
+### test and coverage
+
+Run `gulp` or `npm test`, you will see something like:
 
 ![test](test.png)
 
