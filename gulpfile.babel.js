@@ -10,20 +10,15 @@ gulp.task('bin', ['clean'], () => {
     .pipe(gulp.dest('build/bin'));
 });
 
-gulp.task('lib', ['clean'], () => {
-  let babel = require('gulp-babel');
-  return gulp.src('lib/*.es6')
-    .pipe(babel())
-    .pipe(gulp.dest('build/lib'));
-});
-
 gulp.task('docs', ['clean'], () => {
   return gulp.src(['README.md', 'LICENSE'])
     .pipe(gulp.dest('build'));
 });
 
 gulp.task('template', ['clean'], () => {
-  return gulp.src('template/*')
+  let path = require('path');
+  let srcdir = path.resolve(__dirname, 'template');
+  return gulp.src(['*', '**/*'], { cwd: srcdir, base: srcdir })
     .pipe(gulp.dest('build/template'));
 });
 
@@ -37,7 +32,7 @@ gulp.task('package', ['clean'], () => {
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('build', ['bin', 'lib', 'docs', 'template', 'package']);
+gulp.task('build', ['bin', 'docs', 'template', 'package']);
 
 gulp.task('lint', () => {
   let eslint = require('gulp-eslint');
