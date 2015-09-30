@@ -64,7 +64,7 @@ function copy() {
   ];
   var srcdir = path.resolve(__dirname, '..');
   return vfs.src(files, { cwd: srcdir, base: srcdir })
-    .pipe(vfs.dest(process.cwd(), { overwrite: true }));
+    .pipe(vfs.dest(process.cwd(), { overwrite: false }));
 }
 
 

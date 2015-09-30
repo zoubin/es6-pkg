@@ -19,9 +19,7 @@ Make sure you are in the package root directory,
 where a `package.json` must exist.
 
 Make sure no `index.js` exist in the root directory.
-The entry file should be `lib/main.es6`.
-
-Run `es6pkg init` to create dirctories and files.
+The entry file is `lib/main.es6` by default.
 
 Your project directories should look like this:
 
@@ -66,15 +64,6 @@ Your project directories should look like this:
 └── test
     └── main.es6
 ```
-
-Copy `index.js`, 
-`gulpfile.babel.js`,
-`lib/main.es6`, `test/main.es6`.
-
-`.gitignore`,
-`.npmignore`
-
-Edit `package.json`.
 
 Run `npm test` or `gulp` to see if everything works properly.
 You should see output like:
