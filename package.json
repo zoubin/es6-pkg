@@ -28,6 +28,7 @@
   "dependencies": {
     "callback-sequence": "^1.2.1",
     "util-mix": "^3.0.1",
+    "gulp-json-editor": "^2.2.1",
     "vinyl-fs": "^2.1.1"
   },
   "devDependencies": {
