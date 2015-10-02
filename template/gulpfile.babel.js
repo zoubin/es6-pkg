@@ -5,6 +5,13 @@ gulp.task('clean', () => {
   return del('build');
 });
 
+gulp.task('bin', ['clean'], () => {
+  let babel = require('gulp-babel');
+  return gulp.src('bin/*.es6')
+    .pipe(babel())
+    .pipe(gulp.dest('build/bin'));
+});
+
 gulp.task('lib', ['clean'], () => {
   let babel = require('gulp-babel');
   return gulp.src('lib/*.es6')
@@ -27,7 +34,7 @@ gulp.task('package', ['clean'], () => {
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('build', ['lib', 'docs', 'package']);
+gulp.task('build', ['lib', 'docs', 'bin', 'package']);
 
 gulp.task('lint', () => {
   let eslint = require('gulp-eslint');

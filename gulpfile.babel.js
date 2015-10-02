@@ -6,7 +6,9 @@ gulp.task('clean', () => {
 });
 
 gulp.task('bin', ['clean'], () => {
-  return gulp.src('bin/cmd.js')
+  let babel = require('gulp-babel');
+  return gulp.src('bin/*.es6')
+    .pipe(babel())
     .pipe(gulp.dest('build/bin'));
 });
 
