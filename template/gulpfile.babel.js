@@ -44,45 +44,47 @@ gulp.task('lint', () => {
     .pipe(eslint.failAfterError());
 });
 
-gulp.task('coverage', require('callback-sequence')(
-  function instrument() {
-    require('./');
-    let istanbul = require('gulp-istanbul');
-    let isparta = require('isparta');
-    return gulp.src('lib/*.es6')
-      .pipe(istanbul({
-        includeUntested: true,
-        instrumenter: isparta.Instrumenter,
-      }))
-      .pipe(istanbul.hookRequire({
-        extensions: ['.es6'],
-      }));
-  },
-  function test() {
-    require('./');
-    let tape = require('gulp-tape');
-    let reporter = require('tap-spec');
-    return gulp.src('test/*.es6')
-      .pipe(tape({
-        reporter: reporter(),
-      }));
-  },
-  function report() {
-    let istanbul = require('gulp-istanbul');
-    return gulp.src('test/*.es6', { read: false })
-      .pipe(istanbul.writeReports())
-      .pipe(istanbul.enforceThresholds({
-        thresholds: {
-          global: {
-            statements: 90,
-            functions: 90,
-            branches: 90,
-            lines: 90,
-          },
-        },
-      }));
-  }
-));
-
+gulp.task('test', test);
+gulp.task('coverage', require('callback-sequence')(instrument, test, report));
 gulp.task('default', ['lint', 'coverage']);
+
+function report() {
+  let istanbul = require('gulp-istanbul');
+  return gulp.src('test/*.es6', { read: false })
+    .pipe(istanbul.writeReports())
+    .pipe(istanbul.enforceThresholds({
+      thresholds: {
+        global: {
+          statements: 90,
+          functions: 90,
+          branches: 90,
+          lines: 90,
+        },
+      },
+    }));
+}
+
+function instrument() {
+  require('./');
+  let istanbul = require('gulp-istanbul');
+  let isparta = require('isparta');
+  return gulp.src('lib/*.es6')
+    .pipe(istanbul({
+      includeUntested: true,
+      instrumenter: isparta.Instrumenter,
+    }))
+    .pipe(istanbul.hookRequire({
+      extensions: ['.es6'],
+    }));
+}
+
+function test() {
+  require('./');
+  let tape = require('gulp-tape');
+  let reporter = require('tap-spec');
+  return gulp.src('test/*.es6')
+    .pipe(tape({
+      reporter: reporter(),
+    }));
+}
 
