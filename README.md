@@ -1,6 +1,8 @@
 # es6-pkg
 Boilerplate for developing node modules using es6
 
+**NOTE**: This package is no longer maintained. Use [javascript-package-boilerplate](https://github.com/zoubin/javascript-package-boilerplate) instead.
+
 ## Usage
 
 ```bash
